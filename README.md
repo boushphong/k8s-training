@@ -88,3 +88,9 @@ Meaning:
 ## ReplicaSets
 Setting Replicas will ensure the number of replicas of a container to be running at the same time.
 Pod will be recreated automatically if a replica goes down.
+
+![image](https://user-images.githubusercontent.com/59940078/168759162-4431f6f7-a78e-4f08-a944-d101dc97501b.png)
+
+Meaning:
+- template: template for the pods
+- matchLabels: pretty much the same as selector (just now it is in Replica)
