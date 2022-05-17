@@ -42,11 +42,16 @@ Explore minikube ip cluster (the VM that minikube created for us)
 Show information about the kubernetes cluster
 - kubectl get all
 
-Deploy a pod to the cluster
+Deploy a pod to the cluster. or to configure changes (when yaml file being edited)
 - kubectl apply -f <file_name>.yaml
 
-Get more information about a pod
+Delete a pod or a service. --force to forcefully terminate the pod
+- kubectl delete pod <pod_name>
+- kubectl delete service <service_name>
+
+Get more information about a pod or service
 - kubectl describe pod <pod_name>
+- kubectl describe service <service_name>
 
 Connect to a pod and execute command against that pod
 - kubectl exec <pod_name> <command>
@@ -59,16 +64,27 @@ Port forwarding for docker installation
 
 ## Services in Kubernetes
 A service is a long-running object in kubernetes unlike a Pod.
-With a service you can connect to the Kubernetes Cluster and the service will find a suitable Pod to service that request
+With a service you can connect to the kubernetes Cluster and the service will find a suitable Pod to service that request
 
 Pod Label:
 
 ![img_2](https://user-images.githubusercontent.com/59940078/168724595-586417fe-c473-4afa-8576-a4d26724f5c3.png)
 ![image](https://user-images.githubusercontent.com/59940078/168724959-19061cbb-b8d5-443b-9cc0-f5c0865478b2.png)
 
+Meaning:
+- kind: in this case pod service
+- name: name of the service (very important) This will be the name where services will be able to talk to each other. PLEASE NAME APPROPRIATELY.
+- selector: select which pods are going to be represented by a service. The service becomes a network endpoint for either other services or maybe external users to connect to (eg browser)
+- type: nodePort (expose a service through port), ClusterIP (only for internal microservice communication)
 
 
+## Deploying Zero-down time service (Amateur way)
 
+![image](https://user-images.githubusercontent.com/59940078/168730735-c5c32734-0940-49c5-8c3b-f876a872302b.png)
 
+- Deploy an updated Pod
+- Change release label in service to a new one that holds the new Pod (Traffic then will be automatically redirected to the new pod)
 
-
+## ReplicaSets
+Setting Replicas will ensure the number of replicas of a container to be running at the same time.
+Pod will be recreated automatically if a replica goes down.
