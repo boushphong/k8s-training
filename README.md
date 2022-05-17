@@ -64,6 +64,8 @@ With a service you can connect to the Kubernetes Cluster and the service will fi
 Pod Label:
 
 ![img_2](https://user-images.githubusercontent.com/59940078/168724595-586417fe-c473-4afa-8576-a4d26724f5c3.png)
+![image](https://user-images.githubusercontent.com/59940078/168724959-19061cbb-b8d5-443b-9cc0-f5c0865478b2.png)
+
 
 
 
