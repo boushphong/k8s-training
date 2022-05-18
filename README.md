@@ -45,9 +45,10 @@ Show information about the kubernetes cluster
 Deploy a pod to the cluster. or to configure changes (when yaml file being edited)
 - kubectl apply -f <file_name>.yaml
 
-Delete a pod or a service. --force to forcefully terminate the pod
+Delete a pod, service, replica set ... --force to forcefully terminate the pod
 - kubectl delete pod <pod_name>
 - kubectl delete service <service_name>
+- kubectl delete rs <rs_name>
 
 Get more information about a pod or service
 - kubectl describe pod <pod_name>
@@ -61,6 +62,15 @@ Connect to a pod with an interactive shell
 
 Port forwarding for docker installation
 - kubectl port-forward <pod_name> <local_port>:<pod_port>
+
+Status of rolling out deployment
+- kubectl rollout status deploy <deploy_name>
+
+History of rolling out deployment
+- kubectl rollout history deploy <deploy_name>
+
+Return to earlier version (Not specifying --to-revision option will automatically roll back 1 revision)
+- kubectl rollout undo deploy <deploy_name> --to-revision=<revision_number>
 
 ## Services in Kubernetes
 A service is a long-running object in kubernetes unlike a Pod.
@@ -94,3 +104,35 @@ Pod will be recreated automatically if a replica goes down.
 Meaning:
 - template: template for the pods
 - matchLabels: pretty much the same as selector (just now it is in Replica)
+
+## Deployment
+
+![image](https://user-images.githubusercontent.com/59940078/168823467-e4748eb6-9c16-4668-88a2-a6ae64900f8a.png)
+
+Meaning:
+- kind: Deployment kind (will manage replica set) (Basicly the same structure as replica set)
+
+Rolling Deployment without manually changing the label
+
+Be careful when rolling back to earlier deployment, yaml file won't be changed. Fixing the yaml file is necessary
+
+## Networking in Kubernetes
+
+![image](https://user-images.githubusercontent.com/59940078/168922081-32366612-0340-43d9-9456-e5315e90395c.png)
+
+Not recommended to deploy 2 or more containers in a single pods. Because then we would have to find you whether the pod fails because of a service or another, containers will do a "lookup operation" to make network requests (kubernetes Service of Kube-dns will take care of all the ip address of different containers inside different pods)
+
+Recommended Deployment Architecture (1 service per pod)
+Kubernetes manage its own DNS service. Therefore, in order for a container inside a pod communicate with another container in a different pod,  
+
+![image](https://user-images.githubusercontent.com/59940078/168922590-f41d8683-43d6-4303-88f6-a9c022636ca6.png)
+
+### Namespace (Grouping pods together)
+
+Namespace is a virtual cluster
+
+![image](https://user-images.githubusercontent.com/59940078/168924538-a1369387-512e-40bb-9279-045a07f92851.png)
+
+Getting all namespaces
+- kubectl get ns
+
