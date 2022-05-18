@@ -60,6 +60,9 @@ Connect to a pod and execute command against that pod
 Connect to a pod with an interactive shell
 - kubectl -it exec webapp sh
 
+Log checking for a pod. [options] -f to freeze the log and follow as log being output
+- kubectl logs <pod_name>
+
 Port forwarding for docker installation
 - kubectl port-forward <pod_name> <local_port>:<pod_port>
 
@@ -120,10 +123,11 @@ Be careful when rolling back to earlier deployment, yaml file won't be changed. 
 
 ![image](https://user-images.githubusercontent.com/59940078/168922081-32366612-0340-43d9-9456-e5315e90395c.png)
 
-Not recommended to deploy 2 or more containers in a single pods. Because then we would have to find you whether the pod fails because of a service or another, containers will do a "lookup operation" to make network requests (kubernetes Service of Kube-dns will take care of all the ip address of different containers inside different pods)
-
+Not recommended to deploy 2 or more containers in a single pods. Because then we would have to find out whether the pod fails because of a service or another.
 Recommended Deployment Architecture (1 service per pod)
-Kubernetes manage its own DNS service. Therefore, in order for a container inside a pod communicate with another container in a different pod,  
+
+Kubernetes manage its own DNS service. Therefore, in order for a container inside a pod to communicate with another container in a different pod, containers will do a "lookup operation" (to the DNS server of kubernetes) to make network requests (kubernetes Service of Kube-dns will take care of all the ip address of different containers inside different pods)
+
 
 ![image](https://user-images.githubusercontent.com/59940078/168922590-f41d8683-43d6-4303-88f6-a9c022636ca6.png)
 
@@ -136,3 +140,37 @@ Namespace is a virtual cluster
 Getting all namespaces
 - kubectl get ns
 
+## Persistence and Volumes
+
+Volume mount tag for pod templating. 
+
+Please consult the docs at: [k8s volumes!](https://kubernetes.io/docs/concepts/storage/volumes/) for different volumes type (every volume type has different tag)
+
+### Sample local mount
+
+![image](https://user-images.githubusercontent.com/59940078/169046263-f9afcd71-7e99-46c8-8c83-2f541ef62764.png)
+
+- mountPath: this tag is the directory you want to persist in your local computer. (if the service is a database, please look through docs to find where the db store its data)
+
+- volumes:
+- hostPath: host path tag (this would be different for different cloud providers)
+- path: where to persist data from the container to your local computer
+- type:
+
+![image](https://user-images.githubusercontent.com/59940078/169048203-6e64a310-85d5-445e-9bc0-1c016bfa6b7a.png)
+
+### PersistentVolumeClaims
+PVC is useful when you migrate from different cloud providers (different storage type). You won't have to hardcode configuration in your pod yaml file, instead you make a seperate yaml file to manage the persistent storage configuration
+
+[Persistent volumes docs!](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
+
+Example for mongodb:
+
+![image](https://user-images.githubusercontent.com/59940078/169060702-abe43a50-f42f-4d76-954a-93ffd53a0251.png)
+
+## StorageClasses and Binding
+
+Command line
+
+Get persistentVolumes:
+- kubectl get pv
