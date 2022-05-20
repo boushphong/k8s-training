@@ -128,6 +128,10 @@ Recommended Deployment Architecture (1 service per pod)
 
 Kubernetes manage its own DNS service. Therefore, in order for a container inside a pod to communicate with another container in a different pod, containers will do a "lookup operation" (to the DNS server of kubernetes) to make network requests (kubernetes Service of Kube-dns will take care of all the ip address of different containers inside different pods)
 
+### Example
+![image](https://user-images.githubusercontent.com/59940078/169436383-406f2bbc-1f07-459d-ad33-868e00f9c553.png)
+
+From the webapp pod, the webapp pod can make network request to another pod which contains mysql service by referencing the metadata name of : database (in the image above). The kube-dns service will resolve the database name to the correct IP in the kubernetes cluster
 
 ![image](https://user-images.githubusercontent.com/59940078/168922590-f41d8683-43d6-4303-88f6-a9c022636ca6.png)
 
@@ -142,7 +146,7 @@ Getting all namespaces
 
 ## Persistence and Volumes
 
-Volume mount tag for pod templating. 
+Volume mount tag for pod templating.
 
 Please consult the docs at: [k8s volumes!](https://kubernetes.io/docs/concepts/storage/volumes/) for different volumes type (every volume type has different tag)
 
