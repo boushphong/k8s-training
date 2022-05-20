@@ -141,6 +141,11 @@ Namespace is a virtual cluster
 
 ![image](https://user-images.githubusercontent.com/59940078/168924538-a1369387-512e-40bb-9279-045a07f92851.png)
 
+The pre-configured namespace in kubernetes is named "default". A namespace is a local network of pods.
+To make network requests to a different pod in a different namespace. You have to reference the namespace of that pod in your app's URL.
+
+![image](https://user-images.githubusercontent.com/59940078/169463837-8edcab63-91a4-43cf-85d4-328b31889f2c.png)
+
 Getting all namespaces
 - kubectl get ns
 
