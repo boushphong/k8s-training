@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fleetman-webapp # name of the service
+
+spec:
+  # This defines which pods are going to be represented by this service
+  # The service becomes a network endpoint for either other services
+  # or maybe external users to connect to (eg browser)
+  selector:
+    app: webapp # App is the label name, has to point to the same label in the metadata of the service in pod yaml
+    release: "0-5"
+
+  ports:
+    - name: http
+      port: 80 # Port inside the port
+      nodePort: 30080 # Expose port 30080 (-p 30080:80)
+
+  type: NodePort
