@@ -133,6 +133,8 @@ Meaning:
 - apiVersion: Deployment kind is always in apps/v1
 - kind: Deployment kind (will manage replica set) (Basicly the same structure as replica set)
 
+![image](https://user-images.githubusercontent.com/59940078/187024955-111d2081-62e9-4977-86a7-c791506ef357.png)
+
 Rolling Deployment without manually changing the label
 
 Be careful when rolling back to earlier deployment, yaml file won't be changed. Fixing the yaml file is necessary
