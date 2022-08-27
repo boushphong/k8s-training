@@ -1,5 +1,4 @@
 # k8s
-
 ## Kubernetes Terminology
 
 ![image](https://user-images.githubusercontent.com/59940078/187017788-a4dcf6ff-4bc8-400f-be59-c1e35186afcc.png)
