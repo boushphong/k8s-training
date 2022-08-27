@@ -15,6 +15,8 @@ Kubernetes is responsible for:
 - Ensuring pods are running
 - Ensuring pods aren't using too much resource (Disc, CPU ...)
 
+A Pod's IPAddress is randomly assigned.
+
 ![img](https://user-images.githubusercontent.com/59940078/168724531-cfcd779a-a73b-4626-9873-207ae35f37e9.png)
 
 Basic Example:
