@@ -22,13 +22,16 @@ Basic Example:
 ![img_1](https://user-images.githubusercontent.com/59940078/168724556-9a23a6f1-6636-40ee-ad58-d6f88400b56a.png)
 
 Meaning:
+
+![image](https://user-images.githubusercontent.com/59940078/187019039-edd58637-a78d-43c1-a23f-99f23a7c31bf.png)
+
 - apiVersion:
 - Kind: the kind of object in this case Pod Object
 - Metadata: gives pod some metadata information. (name of the pod ...)
 - spec: Specifications
 - containers: 
 - name: name of the container
-- image: Docker image
+- image: Docker image (without the tag. Docker will try to pull latest image from Docker Hub (not images built locally)
 - command: shell command
 - args: Arguments
 
@@ -36,12 +39,14 @@ Meaning:
 - kubectl: The Kubernetes command-line tool, kubectl, allows you to run commands against Kubernetes clusters.
 - minikube: Minikube lets you run a single-node Kubernetes cluster locally
 
-## Command line
+## Common command line
 Start, stop, pause ... a kubernetes cluster locally.
 - minikube start, minikube stop, minikube pause ...
 
 Explore minikube ip cluster (the VM that minikube created for us)
 - minikube ip
+
+![image](https://user-images.githubusercontent.com/59940078/187020454-f4a4fcf6-4da3-4bf5-8f33-97f90803c24f.png)
 
 Show information about the kubernetes cluster
 - kubectl get all
@@ -83,6 +88,8 @@ Return to earlier version (Not specifying --to-revision option will automaticall
 A service is a long-running object in kubernetes unlike a Pod.
 With a service you can connect to the kubernetes Cluster and the service will find a suitable Pod to service that request
 
+![image](https://user-images.githubusercontent.com/59940078/187024244-51e701a4-3618-4b36-8007-5fb3bf7582e3.png)
+
 Pod Label:
 
 ![img_2](https://user-images.githubusercontent.com/59940078/168724595-586417fe-c473-4afa-8576-a4d26724f5c3.png)
@@ -97,10 +104,16 @@ Meaning:
 
 ## Deploying Zero-down time service (Amateur way)
 
+![image](https://user-images.githubusercontent.com/59940078/187023650-3eaeec84-bc45-4737-b82c-5f96e23dbd96.png)
+
 ![image](https://user-images.githubusercontent.com/59940078/168730735-c5c32734-0940-49c5-8c3b-f876a872302b.png)
 
 - Deploy an updated Pod
 - Change release label in service to a new one that holds the new Pod (Traffic then will be automatically redirected to the new pod)
+
+## Deploying Zero-down time service (Prefered way)
+
+![image](https://user-images.githubusercontent.com/59940078/187023708-96024aff-6f6e-4f25-81c0-a79c7b862716.png)
 
 ## ReplicaSets
 Setting Replicas will ensure the number of replicas of a container to be running at the same time.
@@ -117,11 +130,18 @@ Meaning:
 ![image](https://user-images.githubusercontent.com/59940078/168823467-e4748eb6-9c16-4668-88a2-a6ae64900f8a.png)
 
 Meaning:
+- apiVersion: Deployment kind is always in apps/v1
 - kind: Deployment kind (will manage replica set) (Basicly the same structure as replica set)
 
 Rolling Deployment without manually changing the label
 
 Be careful when rolling back to earlier deployment, yaml file won't be changed. Fixing the yaml file is necessary
+
+Deleting a pod that is tied to a deploymenet with a replica set will recreate the pod. Also in the case if the pod fails
+
+### Commond command line for deployment
+
+![image](https://user-images.githubusercontent.com/59940078/187021284-d148a98a-9d89-421a-87bc-19bf213af432.png)
 
 ## Networking in Kubernetes
 
