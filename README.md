@@ -206,6 +206,10 @@ Example for mongodb:
 
 ## StorageClasses and Binding
 
+A StorageClass is used to link a PersistentVolumeClaim and PersistentVolume. Storage Classes are really useful when we move across to a cloud environment. A storage class allows a cluster administrator to set up different classes of storage (Magnetic Hard Disk, SSD, or use both ...).
+
+At run time, the PVC is going to search across the entire cluster(on the cloud) for any PersistentVolume it can find, which satisfies the requirement of sufficient storage, with the correct access mode, and with a matching label of a defined **storageClassName**. Then the Binding process will occur. (Bind to the database data of the previous deployment).
+
 Command line
 
 Get persistentVolumes:
