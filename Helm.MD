@@ -4,11 +4,11 @@
 
 - Adding a repo
 
-```helm repo add <your_choice_of_label_name_for_the_repo_URL> <repo_URL>```
+```helm repo add <your_choice_of_label_name_for_repo_URL> <repo_URL>```
 
 - Install a package(chart) into a k8s cluster
 
-```helm install <your_choice_of_label_name_for_the_chart> <name_of_the_package_from_the_repo>```
+```helm install <your_choice_of_label_name_for_chart> <given_label_name_for_repo_url/package_name_repo>```
 
 - Listing registered repos
 
@@ -16,4 +16,19 @@
 
 - Kubectl (Edit yaml configs of running pod, service ...)
 
-```kubectl edit <of_kind_you_want_to_edit> <according_name_you_want_to_edit>
+```kubectl edit <of_kind_you_want_to_edit> <according_name_you_want_to_edit>```
+
+## Working with Chart Values
+A Chart is mostly going to have some configurations coming with it, and these are called values in a Helm Chart.
+
+- Showing value of a chart
+
+```helm show values <given_label_name_for_repo_url/package_name_repo>```
+
+- Upgrading a chart's default value. (After Chart's Installation)
+
+```helm upgrade <given_label_name_for_chart> <given_label_name_for_repo_url/package_name_repo> --set <hierarchy_value.(if present)><key>=<value>```
+
+- Upgrading a chart's default value. (During Chart's Installation)
+
+```helm install <given_label_name_for_chart> <given_label_name_for_repo_url/package_name_repo> --set <hierarchy_value.(if present)><key>=<value>```
