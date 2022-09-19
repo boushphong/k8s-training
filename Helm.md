@@ -18,6 +18,20 @@
 
 ```kubectl edit <of_kind_you_want_to_edit> <according_name_you_want_to_edit>```
 
+## Version Control Helm Chart
+
+- Pulling Chart's Source Code for Version Control
+
+```helm pull <given_label_name_for_repo_url/package_name_repo>```
+
+- Install a package(chart) into a k8s cluster from locally pulled chart
+
+```helm install <given_label_name_for_chart> <chart_folder>```
+
+- Generate a k8s yaml config file from Helm
+
+```helm template <your_choice_of_label_name_for_chart> <chart_folder> <flags>```
+
 ## Working with Chart Values
 A Chart is mostly going to have some configurations coming with it, and these are called values in a Helm Chart.
 
