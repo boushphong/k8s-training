@@ -31,4 +31,4 @@ A Chart is mostly going to have some configurations coming with it, and these ar
 
 - Upgrading a chart's default value. (During Chart's Installation)
 
-```helm install <given_label_name_for_chart> <given_label_name_for_repo_url/package_name_repo> --set <hierarchy_value.(if present)><key>=<value>```
+```helm install <given_label_name_for_chart> <given_label_name_for_repo_url/package_name_repo> --set <hierarchy_key.(if present)><key>=<value>```
