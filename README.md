@@ -214,3 +214,13 @@ Command line
 
 Get persistentVolumes:
 - kubectl get pv
+
+## Liveness and Readiness Probe
+
+Liveness and Readiness probes are methods in which k8s knows when a pod is actually ready (e.g. to receive requests ... etc).
+- Could be done through calling HTTPs endpoint.
+- Checking log file in containers
+...
+
+
+
