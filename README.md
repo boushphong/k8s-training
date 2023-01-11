@@ -222,5 +222,17 @@ Liveness and Readiness probes are methods in which k8s knows when a pod is actua
 - Checking log file in containers
 ...
 
+## ConfigMaps and Secrets
+ConfigMaps are used to map k8s object variables to be used inside a pod, could be environmental variables.
+Secrets are similar to ConfigMaps, however they encode the variables (These are not very secured)
 
+## Other workload types for kubernetes
+- Batch Job: A batch job workload is a `Pod` kind that runs process until it finishes. Hence it would have 
+  
+  `restartPolicy: Never`
+
+Pod will still remain as `Completed` status once its done unless you clean up pods manually or automatically with TTL controller config.
+
+Batch Job with `Job` kind comes with additional configs such as `backOffLimit`.
+- backOffLimit: Number of retries of a `Job` pod if it fails
 
