@@ -227,12 +227,31 @@ ConfigMaps are used to map k8s object variables to be used inside a pod, could b
 Secrets are similar to ConfigMaps, however they encode the variables (These are not very secured)
 
 ## Other workload types for kubernetes
-- Batch Job: A batch job workload is a `Pod` kind that runs process until it finishes. Hence it would have 
+- **Batch Job**: A batch job workload is a `Pod` kind that runs process until it finishes. Hence it would have 
   
   `restartPolicy: Never`
 
-Pod will still remain as `Completed` status once its done unless you clean up pods manually or automatically with TTL controller config.
-
 Batch Job with `Job` kind comes with additional configs such as `backOffLimit`.
-- backOffLimit: Number of retries of a `Job` pod if it fails
 
+`backOffLimit`: Number of retries of a `Job` pod if it fails
+
+- **Cron Job**: Similar to `Batch Job`. A `CronJob` kind comes with `schedule` configuration, ...
+
+**_NOTE_**: Pod (`Job` or `CronJob`) will still remain as `Completed` status once its done unless you clean up pods manually or automatically with TTL controller config.
+
+- **DaemonSet**: A `DaemonSet` ensures that all Nodes (or some) run a copy of a pod. If a node gets added, a `DaemonSet` pod will be added as well. Use case: log collection (fluentd, logstash), metrics collections (Prometheus, ...)
+
+- **StatefulSets**: A `StatefulSet` is used when you need a set of pods with known, predictable (such as my-pod-1, my-pod-2, ...) names, you would typically want clients to be able to call pods, **by their names**, unlike a `Deployment RecplicaSet`. 
+
+From k8s 1.3 onwards, there is a `PetSet` (just like `StatefulSet`) object for this purpose. (pods will have preditable names in sequence: 1, 2, 3 ..., clients can address pods by their names ...)
+
+Use case: Database replication (needs a Headless service in k8s) (Such as mongo-1 for primary instance, mongo-2 as secondary instance ...)
+
+`StatefulSets` are valuable for applications that require one or more of the following.
+
+- Stable, unique network identifiers.
+- Stable, persistent storage.
+- Ordered, graceful deployment and scaling.
+- Ordered, automated rolling updates.
+
+NOTE: `State` here just means `Stateful Naming` of pods. It is not recommended to host Database inside a container.
