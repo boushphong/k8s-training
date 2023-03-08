@@ -51,4 +51,6 @@ A Chart is mostly going to have some configurations coming with it, and these ar
 
 ```helm install <given_label_name_for_chart> <given_label_name_for_repo_url/package_name_repo> --set <hierarchy_key.(if present)><key>=<value>```
 
+eg. ```helm upgrade monitoring prom-repo/kube-prometheus-stack --set grafana.adminPassword=admin```
+
 **During and After installation, if the set key is not present in the chart, the key will be created**
