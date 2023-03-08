@@ -28,13 +28,21 @@
 
 ```helm pull <given_label_name_for_repo_url/package_name_repo>```
 
+eg. ```helm pull prom-repo/kube-prometheus-stack```
+
 - Install a package(chart) into a k8s cluster from locally pulled chart
 
 ```helm install <given_label_name_for_chart> <chart_folder>```
 
+eg. ```helm install monitoring ./kube-prometheus-stack```
+
 - Generate a k8s yaml config file from Helm
 
-```helm template <your_choice_of_label_name_for_chart> <chart_folder> <flags>```
+```helm template <your_choice_of_label_name_for_chart> <chart_folder> <--options>```
+
+eg. ```helm template monitoring ./kube-prometheus-stack > monitoring-stack.yaml```
+
+eg. ```helm template monitoring ./kube-prometheus-stack --values=./kube-prometheus-stack/myvalues.yaml > monitoring-stack.yaml```
 
 ## Working with Chart Values
 A Chart is mostly going to have some configurations coming with it, and these are called values in a Helm Chart.
