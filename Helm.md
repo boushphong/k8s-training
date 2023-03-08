@@ -10,6 +10,10 @@
 
 ```helm install <your_choice_of_label_name_for_chart> <given_label_name_for_repo_url/package_name_repo>```
 
+- List releases of charts
+
+```helm list```
+
 - Listing registered repos
 
 ```helm repo list```
